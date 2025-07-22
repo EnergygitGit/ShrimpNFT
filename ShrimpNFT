@@ -1,0 +1,24 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ShrimpNFT is ERC721, Ownable {
+    uint256 public tokenCounter;
+    string public baseURI;
+
+    constructor(string memory _baseURI) ERC721("ShrimpNFT", "SHRIMP") {
+        tokenCounter = 0;
+        baseURI = _baseURI;
+    }
+
+    function mint(address to) public onlyOwner {
+        require(tokenCounter < 10000, "Max supply reached");
+        _safeMint(to, tokenCounter);
+        tokenCounter++;
+    }
+
+    function _baseURI() internal view override returns (string memory) {
+        return baseURI;
+    }
+}
