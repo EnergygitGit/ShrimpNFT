@@ -12,13 +12,4 @@ contract ShrimpNFT is ERC721, Ownable {
         baseURI = _baseURI;
     }
 
-    function mint(address to) public onlyOwner {
-        require(tokenCounter < 10000, "Max supply reached");
-        _safeMint(to, tokenCounter);
-        tokenCounter++;
-    }
-
-    function _baseURI() internal view override returns (string memory) {
-        return baseURI;
-    }
-}
+ 
